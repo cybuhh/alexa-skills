@@ -1,0 +1,24 @@
+{
+  "name": "alexa-skills",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/cybuhh/alexa-skills",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cybuhh/alexa-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cybuhh/alexa-skills/issues"
+  },
+
+  "dependencies": {
+    "alexa-app": "^4.2.2",
+    "express": "^4.16.3"
+  }
+}
