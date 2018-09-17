@@ -1,5 +1,6 @@
 web:
   image: nginx
+  restart: always
   ports:
     - "80:80"
     - "443:443"
@@ -7,7 +8,7 @@ web:
     - ./nginx-tls.conf:/etc/nginx/nginx.conf:ro
     - ./cert:/cert:ro
   links:
-    - app:app
+    - app
   volumes_from:
     - app
   environment:
@@ -15,6 +16,7 @@ web:
 app:
   build: .
   command: node index
+  restart: always
   ports:
     - "3000:3000"
   environment:
