@@ -1,3 +1,17 @@
+web:
+  image: nginx
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./nginx-tls.conf:/etc/nginx/nginx.conf:ro
+    - ./cert:/cert:ro
+  links:
+    - app:app
+  volumes_from:
+    - app
+  environment:
+    - HOST
 app:
   build: .
   command: node index
