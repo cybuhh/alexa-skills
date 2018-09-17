@@ -5,14 +5,16 @@ web:
     - "80:80"
     - "443:443"
   volumes:
-    - ./nginx-tls.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx-tls.conf:/etc/nginx/nginx.conf.tpl:ro
     - ./cert:/cert:ro
+  command: /bin/bash -c 'sed -e "s/SKILLS_PATH/$SKILLS_PATH/g" < /etc/nginx/nginx.conf.tpl > /etc/nginx/nginx.conf && exec nginx -g "daemon off;"'
   links:
     - app
   volumes_from:
     - app
   environment:
     - HOST
+    - SKILLS_PATH
 app:
   build: .
   command: node index
