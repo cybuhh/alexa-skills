@@ -1,0 +1,8 @@
+app:
+  build: .
+  command: node index
+  ports:
+    - "3000:3000"
+  environment:
+    - PORT
+    - TV_IP

@@ -1,9 +1,11 @@
 const express = require('express');
 const alexa = require('alexa-app');
 
+const tvApi = require('./tv-api')(process.env.TV_IP);
+
 const port = process.env.port || 3000
 const app = express();
- 
+
 const alexaApp = new alexa.app('tv');
 
 // setup the alexa app and attach it to express before anything else
@@ -22,6 +24,14 @@ alexaApp.intent('turn', {
     const status = request.slot('status');
     console.log('status', status);
     response.say(`You asked to change status to ${status}`);
+    if (status === 'off') {
+      if (tvApi.isAlive()) {
+        tvApi.powerOff();
+      } else { 
+        response.say('TV is offline');
+
+      }
+    }
   }
 );
 
@@ -68,4 +78,4 @@ app.get('/', function (req, res) {
 
 // from here on, you can setup any other express routes or middleware as normal
 app.listen(port);
-console.log(`Listening on port ${port} try http://localhost: ${port}`);
+console.log(`Listening on port ${port} try http://localhost:${port}`);
